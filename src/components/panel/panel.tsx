@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  background: #a8a8a8;
+const Container = styled.div<{ variant?: string }>`
+  background: ${({ variant }) => (variant === 'primary' ? 'green' : '#a8a8a8')};
   padding: 10px;
 `;
 
@@ -26,13 +26,14 @@ const Heading = styled.div`
 `;
 
 export interface PanelProps {
+  variant?: 'primary' | 'secondary';
   heading?: string;
   children: ReactNode;
 }
 
-export function Panel({ heading, children }: PanelProps) {
+export function Panel({ heading, variant = 'primary', children }: PanelProps) {
   return (
-    <Container>
+    <Container variant={variant}>
       {heading && (
         <Heading>
           <div>{heading}</div>
